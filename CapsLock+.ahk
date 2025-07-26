@@ -152,6 +152,18 @@ return
 
 LAlt::return
 
+WheelUp::
+try
+    runFunc(keyset.caps_wheelUp)
+Capslock2:=""
+return
+
+WheelDown::
+try
+    runFunc(keyset.caps_wheelDown)
+Capslock2:=""
+return
+
 <!WheelUp::
 try
     runFunc(keyset.caps_lalt_wheelUp)

@@ -852,14 +852,62 @@ keyfunc_mouse_right(){
     MouseMove, dynamic_speed(), 0, 0, R
 }
 
+; 增加鼠标滚轮速度
+keyfunc_wheelSpeedIncrease(){
+    global
+    mouseWheelSpeed+=1
+    if(mouseWheelSpeed>20)
+    {
+        mouseWheelSpeed:=20
+    }
+    showMsg("mouse wheel speed: " . mouseWheelSpeed, 1000)
+    setSettings("Global","mouseWheelSpeed",mouseWheelSpeed)
+    return
+}
+
+; 减少鼠标滚轮速度
+keyfunc_wheelSpeedDecrease(){
+    global
+    mouseWheelSpeed-=1
+    if(mouseWheelSpeed<1)
+    {
+        mouseWheelSpeed:=1
+    }
+    showMsg("mouse wheel speed: " . mouseWheelSpeed, 1000)
+    setSettings("Global","mouseWheelSpeed",mouseWheelSpeed)
+    return
+}
+
 ; 上滑滚轮
 keyfunc_wheel_up(){
-    Send, {WheelUp 3}
+    global
+    wheelSpeed := mouseWheelSpeed ? mouseWheelSpeed : 5
+    Send, {WheelUp %wheelSpeed%}
 }
 
 ; 下滑滚轮
 keyfunc_wheel_down(){
-    Send, {Wheeldown 3}
+    global
+    wheelSpeed := mouseWheelSpeed ? mouseWheelSpeed : 5
+    Send, {Wheeldown %wheelSpeed%}
+}
+
+; 左滑滚轮
+keyfunc_wheel_left(){
+    global
+    wheelSpeed := mouseWheelSpeed ? Round(mouseWheelSpeed * 0.6) : 3
+    if(wheelSpeed < 1)
+        wheelSpeed := 1
+    Send, {WheelLeft %wheelSpeed%}
+}
+
+; 右滑滚轮
+keyfunc_wheel_right(){
+    global
+    wheelSpeed := mouseWheelSpeed ? Round(mouseWheelSpeed * 0.6) : 3
+    if(wheelSpeed < 1)
+        wheelSpeed := 1
+    Send, {WheelRight %wheelSpeed%}
 }
 
 
